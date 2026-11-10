@@ -179,6 +179,52 @@ dialog::backdrop{background:rgba(1,16,35,.6)}
   .bar{grid-template-columns:80px minmax(0,1fr) 90px}
   .card{padding:20px}
 }
+
+/* ---------- phone layout ---------- */
+.tb-short{display:none}
+@media (max-width:760px){
+  .topbar{font-size:12px}
+  .topbar .container{min-height:32px;flex-wrap:nowrap}
+  .tb-long{display:none}.tb-short{display:inline}
+  header .container{min-height:56px;flex-wrap:nowrap;gap:10px}
+  .brand{gap:8px;min-width:0}
+  .brand .asc{height:17px}
+  .brand .sep{height:22px}
+  .brand .pw small{display:none}
+  .brand .pw svg{height:16px}
+  header .btn.ghost{padding:8px 12px;font-size:13px;margin-left:auto;white-space:nowrap}
+  .phero .container{padding-top:16px;padding-bottom:20px}
+  .phero .crumbs,.phero p{display:none}
+  .phero .pill{font-size:12px;padding:5px 10px}
+  .phero h1{font-size:24px;margin:10px 0 0}
+  .wrap{gap:14px;padding:12px 12px 40px}
+  .steps{position:sticky;top:calc(env(safe-area-inset-top,0px) + 57px);z-index:40;background:var(--mist);margin:0 -12px;padding:8px 12px;scrollbar-width:none;border-bottom:1px solid var(--line)}
+  .steps::-webkit-scrollbar{display:none}
+  .step{padding:7px 12px 7px 8px;font-size:14px;border-color:var(--line);background:#fff}
+  .step .n{width:24px;height:24px;font-size:12px}
+  .card{padding:18px;border-radius:14px}
+  .card h1{font-size:22px}
+  .lead{font-size:15px;margin-bottom:14px}
+  .btn{padding:11px 16px;font-size:14px}
+  .nav{position:sticky;bottom:0;background:#fff;margin:18px -18px -18px;padding:12px 18px calc(12px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);border-radius:0 0 14px 14px;flex-wrap:nowrap}
+  .nav .btn{flex:1}
+  .kpis{grid-template-columns:1fr 1fr;gap:8px}
+  .kpi{padding:12px}.kpi.hl{grid-column:1/-1}
+  .big{font-size:24px}
+  .bar{grid-template-columns:62px minmax(0,1fr) 84px;gap:8px}
+  .bar .track{height:24px}
+  table{min-width:0;font-size:13px}
+  th{font-size:11px;padding:8px}
+  td{padding:8px}
+  .doc{padding:12px}
+  .doc .row{width:100%;justify-content:space-between}
+  .chip{font-size:13px;padding:7px 11px}
+  .split-ai div{font-size:13px}
+  .side .asc-card{display:none}
+  .side{margin-top:4px}
+  .feed{max-height:240px}
+  footer .container{flex-direction:column;align-items:flex-start;gap:8px}
+}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -226,7 +272,7 @@ dialog::backdrop{background:rgba(1,16,35,.6)}
     <symbol id="f-hk" viewBox="0 0 30 20"><rect width="30" height="20" fill="#DE2910"/><circle cx="15" cy="10" r="4.5" fill="none" stroke="#fff" stroke-width="1.6" stroke-dasharray="3 2.6"/></symbol>
   </defs>
 </svg>
-<div class="topbar"><div class="container"><span><b>AI Studio prototype:</b> Incorporation, AI-fied. Not a live service.</span><a href="https://ascentium-sme.vercel.app/" target="_blank" rel="noopener">Back to the website ↗</a></div></div>
+<div class="topbar"><div class="container"><span><b>AI Studio prototype:</b><span class="tb-long"> Incorporation, AI-fied. Not a live service.</span><span class="tb-short"> not a live service</span></span><a href="https://ascentium-sme.vercel.app/" target="_blank" rel="noopener"><span class="tb-long">Back to the website ↗</span><span class="tb-short">Website ↗</span></a></div></div>
 <header><div class="container">
   <a class="brand" href="https://ascentium-sme.vercel.app/" target="_blank" rel="noopener" aria-label="Ascentium powered by Zolvit">
     <svg class="asc" viewBox="0 0 191 29" fill="#0F1514" role="img" aria-label="Ascentium"><use href="#asc-logo"/></svg>
@@ -234,7 +280,7 @@ dialog::backdrop{background:rgba(1,16,35,.6)}
     <span class="pw"><small>Powered by</small><svg viewBox="0 0 161 49" fill="#022B50" aria-hidden="true"><use href="#zv-logo"/></svg></span>
     <span class="studio">AI Studio · Incorporation</span>
   </a>
-  <a class="btn ghost" style="margin-left:auto" href="/ip/">Global IP prototype ↗</a>
+  <a class="btn ghost" style="margin-left:auto" href="/ip/"><span class="tb-long">Global IP prototype</span><span class="tb-short">Global IP</span> ↗</a>
   <div class="hdr-cta"><a class="btn gold" href="https://ascentium-sme.vercel.app/#ascentia" target="_blank" rel="noopener">Talk to Ascentia</a></div>
 </div></header>
 <section class="phero"><div class="container">
@@ -311,8 +357,10 @@ const IP=[['Your mark','Classes by AI'],['Clearance','AI search'],['Route and pr
 function drawSteps(){
   const list=S.tab==='inc'?INC:IP, cur=S[S.tab];
   $('#steps').innerHTML=`<h2>${S.tab==='inc'?'INCORPORATION':'GLOBAL IP'}</h2>`+list.map(([t,s],i)=>`<button class="step ${i<cur?'done':''}" ${i===cur?'aria-current="step"':''} data-go="${i}"><span class="n">${i<cur?'✓':i+1}</span><span>${t}<small>${s}</small></span></button>`).join('');
+  const cs=$('#steps [aria-current]');if(cs)$('#steps').scrollTo({left:Math.max(0,cs.offsetLeft-12),behavior:'smooth'});
 }
-function go(i){S[S.tab]=i;render();window.scrollTo({top:0,behavior:'smooth'})}
+function toMain(){const h=document.querySelector('header').getBoundingClientRect().bottom,st=innerWidth<=760?document.getElementById('steps').offsetHeight:0,y=window.scrollY+document.getElementById('main').getBoundingClientRect().top-h-st-12;if(window.scrollY>y||innerWidth<=760)window.scrollTo({top:Math.max(0,y),behavior:'smooth'})}
+function go(i){S[S.tab]=i;render();toMain()}
 function navBtns(i,last,nextLabel){return `<div class="nav"><button class="btn ghost" data-go="${i-1}" ${i===0?'disabled':''}>Back</button>${last?'':`<button class="btn gold" data-go="${i+1}">${nextLabel||'Continue'} →</button>`}</div>`}
 function split(ai,ex){return `<div class="split-ai"><div class="a"><b>AI did</b>${ai}</div><div class="x"><b>Expert does</b>${ex}</div></div>`}
 
