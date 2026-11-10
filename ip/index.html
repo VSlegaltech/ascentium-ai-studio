@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ascentium AI Studio · Global IP</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%E2%9A%A1%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;600;700&family=Google+Sans+Flex:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+  --navy:#022B50;--navy-2:#0A3D7A;--blue:#114C81;--blue-3:#4081BC;--sky:#E0F2FE;--mist:#F0F6FF;--ice:#F5FAFF;
+  --line:#E5E7EB;--slate:#6B7C93;--ink:#231F20;--gold:#FDD106;--gold-2:#E9B708;--white:#FFFFFF;
+  --good:#0D6B34;--good-bg:#DDF5E6;--warn:#7A5B00;--warn-bg:#FFF1C2;--bad:#A3241B;--bad-bg:#FCE4E2;
+  --r:8px;--r-lg:16px;--shadow:0 1px 2px rgba(2,43,80,.06),0 8px 24px rgba(2,43,80,.08);
+  --font:"Google Sans","Google Sans Flex","Product Sans",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{font-family:var(--font);color:var(--ink);background:var(--mist);line-height:1.55;font-size:15px;-webkit-font-smoothing:antialiased;min-height:100vh}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:#fff}
+a{color:inherit;text-decoration:none}
+svg{display:block}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--blue-3);outline-offset:2px}
+h1,h2,h3,h4{color:var(--navy);line-height:1.18;font-weight:700;letter-spacing:-.01em}
+.container{max-width:1320px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+
+/* top bar + header, as on the website */
+.topbar{background:var(--navy);color:#C9D7E6;font-size:13px}
+.topbar .container{display:flex;justify-content:space-between;align-items:center;min-height:38px;gap:16px;flex-wrap:wrap}
+.topbar b{color:var(--gold);font-weight:600}
+.topbar a:hover{color:#fff}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(255,255,255,.96);backdrop-filter:saturate(1.4) blur(8px);border-bottom:1px solid var(--line)}
+header .container{display:flex;align-items:center;min-height:76px;gap:20px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.brand .asc{height:24px;width:auto}
+.brand .sep{width:1px;height:30px;background:var(--line)}
+.brand .pw{display:flex;flex-direction:column;line-height:1}
+.brand .pw small{font-size:10px;color:var(--slate);letter-spacing:.08em;text-transform:uppercase;margin-bottom:4px}
+.brand .pw svg{height:22px;width:auto}
+.brand .studio{font-size:13px;font-weight:600;color:var(--navy);background:var(--sky);padding:5px 10px;border-radius:999px}
+.tabs{display:inline-flex;background:#fff;border:1px solid var(--line);border-radius:999px;padding:5px;gap:4px;margin-left:auto}
+.tabs button{border:0;background:none;padding:9px 18px;border-radius:999px;font-weight:600;font-size:14.5px;color:var(--slate)}
+.tabs button[aria-selected="true"]{background:var(--navy);color:#fff}
+.hdr-cta{display:flex;gap:10px;align-items:center}
+
+/* page hero, as on the website */
+.phero{background:linear-gradient(160deg,var(--navy) 0%,var(--navy-2) 70%,var(--blue) 100%);color:#C9D7E6;position:relative;overflow:hidden}
+.phero::after{content:"";position:absolute;right:-160px;top:-200px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(64,129,188,.4),transparent 65%)}
+.phero .container{position:relative;z-index:1;padding-top:28px;padding-bottom:44px}
+.crumbs{font-size:13px;color:#9FB6CF;margin-bottom:18px;display:flex;gap:6px}
+.crumbs a:hover{color:#fff}
+.pill{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);padding:7px 14px;border-radius:999px;font-size:13px;color:#fff}
+.pill i{width:8px;height:8px;border-radius:50%;background:var(--gold)}
+.phero h1{color:#fff;font-size:clamp(28px,4vw,44px);margin:14px 0 10px}
+.phero h1 em{font-style:normal;color:var(--gold)}
+.phero p{max-width:640px;font-size:17px}
+
+/* buttons, eyebrow, cards: website styles */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:var(--r);font-weight:600;font-size:15px;border:1.5px solid transparent;background:var(--navy);color:#fff;transition:transform .15s,background .15s}
+.btn:hover{transform:translateY(-1px);background:var(--navy-2)}
+.btn.gold{background:var(--gold);color:var(--navy)}.btn.gold:hover{background:var(--gold-2)}
+.btn.ghost{background:#fff;color:var(--navy);border-color:var(--navy)}.btn.ghost:hover{background:var(--mist)}
+.btn:disabled{opacity:.45;cursor:default;transform:none}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--blue)}
+.eyebrow::before{content:"";width:18px;height:3px;border-radius:2px;background:var(--gold)}
+.ai{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--gold);color:var(--navy)}
+.ex{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--sky);color:var(--blue)}
+
+/* app layout */
+.wrap{max-width:1320px;margin:0 auto;padding:28px 20px 64px;display:grid;grid-template-columns:240px minmax(0,1fr) 300px;gap:22px;align-items:start}
+.steps{position:sticky;top:96px;display:flex;flex-direction:column;gap:6px}
+.steps h2{font-size:12px;letter-spacing:.08em;color:var(--slate);font-weight:700;margin:2px 6px 8px;text-transform:uppercase}
+.step{display:flex;gap:12px;align-items:center;text-align:left;border:1px solid transparent;background:transparent;padding:10px 12px;border-radius:12px;color:var(--navy);font-weight:600}
+.step .n{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:13px;background:#fff;border:1px solid var(--line);color:var(--slate);flex-shrink:0}
+.step small{display:block;color:var(--slate);font-size:12px;font-weight:400}
+.step:hover{background:#fff}
+.step[aria-current="step"]{background:#fff;border-color:var(--line);box-shadow:var(--shadow)}
+.step[aria-current="step"] .n{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+.step.done .n{background:var(--good-bg);border-color:var(--good-bg);color:var(--good)}
+.main{min-width:0}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:28px;box-shadow:var(--shadow)}
+.card h1{font-size:28px;margin:10px 0 6px}
+.lead{color:var(--slate);margin-bottom:20px;max-width:640px;font-size:16px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.field label{font-size:13px;font-weight:600;color:var(--navy)}
+input,select,textarea{font-size:15px;padding:12px 14px;border:1.5px solid var(--line);border-radius:var(--r);background:#fff;color:var(--ink);width:100%;min-width:0}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--blue-3)}
+textarea{min-height:80px;resize:vertical}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.result{margin-top:18px;border-radius:12px;padding:16px 18px;border:1px solid var(--line);background:var(--ice)}
+.result.good{background:#F1FBF4;border-color:#2E9E5B}.result.warn{background:#FFFBEA;border-color:var(--gold-2)}.result.bad{background:#FFF5F4;border-color:#E2847C}
+.result h3{font-size:17px;margin-bottom:4px}
+.result.good h3{color:var(--good)}.result.warn h3{color:var(--warn)}.result.bad h3{color:var(--bad)}
+.think{display:flex;gap:10px;align-items:center;color:var(--slate);margin-top:16px}
+.dots{display:inline-flex;gap:4px}.dots i{width:7px;height:7px;border-radius:50%;background:var(--gold-2);animation:b 1s infinite}
+.dots i:nth-child(2){animation-delay:.15s}.dots i:nth-child(3){animation-delay:.3s}
+@keyframes b{0%,80%,100%{transform:scale(.6);opacity:.5}40%{transform:scale(1);opacity:1}}
+.tbl{overflow-x:auto;margin-top:14px;border:1px solid var(--line);border-radius:12px}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:460px}
+th{text-align:left;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--navy);font-weight:700;padding:10px 14px;background:var(--mist)}
+td{padding:11px 14px;border-top:1px solid var(--line);vertical-align:top}
+.tag{font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;white-space:nowrap}
+.tag.good{background:var(--good-bg);color:var(--good)}.tag.warn{background:var(--warn-bg);color:var(--warn)}.tag.bad{background:var(--bad-bg);color:var(--bad)}.tag.info{background:var(--sky);color:var(--blue)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:8px 14px;font-size:14px;font-weight:600;color:var(--navy)}
+.chip[aria-pressed="true"]{background:var(--navy);border-color:var(--navy);color:#fff}
+.docs{display:grid;gap:10px;margin-top:6px}
+.doc{display:flex;gap:14px;align-items:center;justify-content:space-between;border:1px solid var(--line);border-radius:12px;padding:14px 16px;flex-wrap:wrap;background:#fff}
+.doc b{display:block;color:var(--navy)}.doc small{color:var(--slate)}
+.timeline{display:grid;margin-top:10px}
+.tl{display:grid;grid-template-columns:30px 1fr;gap:12px;padding-bottom:16px;position:relative}
+.tl::before{content:"";position:absolute;left:14px;top:30px;bottom:0;width:2px;background:var(--line)}
+.tl:last-child::before{display:none}
+.tl .dot{width:30px;height:30px;border-radius:50%;background:#fff;border:2px solid var(--line);display:grid;place-items:center;font-size:12px;font-weight:700;color:var(--slate)}
+.tl.on .dot{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+.tl.ok .dot{background:var(--good-bg);border-color:var(--good-bg);color:var(--good)}
+.tl b{color:var(--navy)}.tl small{color:var(--slate);display:block}
+.cert{margin-top:16px;border-radius:16px;padding:20px;background:linear-gradient(160deg,var(--navy),var(--navy-2));color:#C9D7E6}
+.cert b{font-size:20px;color:#fff}
+.bars{display:grid;gap:14px;margin-top:14px}
+.bar{display:grid;grid-template-columns:110px minmax(0,1fr) 110px;gap:12px;align-items:center}
+.bar b{color:var(--navy)}
+.bar .track{height:30px;background:var(--mist);border-radius:8px;overflow:hidden}
+.bar .fill{height:100%;border-radius:8px;transition:width .6s ease}
+.bar .v{font-weight:700;text-align:right;color:var(--navy)}
+.big{font-size:32px;font-weight:700;letter-spacing:-.02em;color:var(--navy)}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+.kpi{border:1px solid var(--line);border-radius:14px;padding:16px;background:#fff}
+.kpi small{color:var(--slate);font-size:12px;font-weight:700;letter-spacing:.04em}
+.kpi.hl{background:var(--navy);border-color:var(--navy)}
+.kpi.hl small{color:#9FB6CF}.kpi.hl .big{color:var(--gold)}.kpi.hl small:last-child{color:#fff}
+.nav{display:flex;justify-content:space-between;gap:10px;margin-top:22px;flex-wrap:wrap}
+.note{font-size:13px;color:var(--slate);margin-top:10px}
+.split-ai{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.split-ai div{border-radius:12px;padding:12px 14px;font-size:13.5px}
+.split-ai .a{background:#FFFBEA;border-left:4px solid var(--gold)}.split-ai .x{background:var(--sky);border-left:4px solid var(--blue-3)}
+.split-ai b{display:block;margin-bottom:2px;color:var(--navy)}
+
+/* side panel */
+.side{position:sticky;top:96px;display:flex;flex-direction:column;gap:14px}
+.side .card{padding:18px}
+.side h2{font-size:15px;display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.feed{display:flex;flex-direction:column;gap:10px;max-height:380px;overflow:auto}
+.feed .it{font-size:13px;border-left:3px solid var(--gold);padding:2px 0 2px 10px}
+.feed .it.e{border-left-color:var(--blue-3)}
+.feed .it small{display:block;color:var(--slate);font-size:11.5px}
+.queue{font-size:13px;display:grid;gap:8px}
+.queue div{display:flex;justify-content:space-between;gap:8px;align-items:center}
+.empty{color:var(--slate);font-size:13px}
+.side .asc-card{background:linear-gradient(160deg,var(--navy),var(--navy-2));color:#C9D7E6;border:0}
+.side .asc-card h2{color:#fff}
+.side .asc-card p{font-size:13px;margin-bottom:12px}
+
+footer{background:#011023;color:#9FB6CF;padding:28px 0;font-size:13px}
+footer .container{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+footer .fb{display:flex;align-items:center;gap:14px}
+footer svg{height:20px;width:auto}
+
+dialog{border:0;border-radius:16px;max-width:640px;width:calc(100% - 32px);padding:0;background:#fff;color:var(--ink);box-shadow:0 30px 80px rgba(1,16,35,.35)}
+dialog::backdrop{background:rgba(1,16,35,.6)}
+.dlg{padding:24px}
+.dlg pre{white-space:pre-wrap;font-family:inherit;font-size:14px;background:var(--mist);border-radius:12px;padding:16px;max-height:50vh;overflow:auto;margin:12px 0}
+
+@media (max-width:1100px){.wrap{grid-template-columns:210px minmax(0,1fr)}.side{grid-column:1/-1;position:static;display:grid;grid-template-columns:1fr 1fr 1fr}}
+@media (max-width:760px){
+  .wrap{grid-template-columns:minmax(0,1fr);padding:16px 12px 40px}
+  .steps{position:static;flex-direction:row;overflow-x:auto;gap:6px;padding-bottom:4px}
+  .steps h2{display:none}.step{flex-shrink:0}.step small{display:none}
+  .side{grid-template-columns:1fr}
+  .split,.split-ai,.kpis{grid-template-columns:1fr}
+  .tabs{margin-left:0;width:100%}.tabs button{flex:1}
+  .hdr-cta,.brand .studio{display:none}
+  .bar{grid-template-columns:80px minmax(0,1fr) 90px}
+  .card{padding:20px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="asc-logo" viewBox="0 0 191 29">
+      <path d="M31.1123 13.6086C31.1123 14.1522 31.4813 14.6075 32.1961 14.942C32.9294 15.2905 33.8011 15.5925 34.8526 15.8527C35.8996 16.1175 36.9326 16.4474 37.9795 16.833C39.0265 17.2372 39.9027 17.9016 40.636 18.8309C41.3693 19.7601 41.7199 20.9309 41.7199 22.3341C41.7199 24.4527 40.9358 26.0835 39.3631 27.2218C37.7905 28.3601 35.8165 28.9363 33.4598 28.9363C29.2353 28.9363 26.3712 27.3055 24.8308 24.0299L29.4428 21.4374C30.0377 23.2261 31.3798 24.1182 33.4783 24.1182C35.3646 24.1182 36.3054 23.5235 36.3054 22.348C36.3054 21.8044 35.9364 21.3491 35.2216 21.0146C34.4883 20.6661 33.6166 20.3641 32.5651 20.0853C31.5182 19.8066 30.4851 19.472 29.4382 19.0539C28.3913 18.6357 27.515 17.9853 26.7817 17.0932C26.0484 16.2011 25.6979 15.0768 25.6979 13.7294C25.6979 11.699 26.4496 10.1054 27.9347 8.92991C29.4197 7.75444 31.2876 7.17831 33.5059 7.17831C35.1847 7.17831 36.702 7.56394 38.0626 8.31662C39.4231 9.0693 40.5069 10.1565 41.3094 11.5596L36.785 14.0314C36.1209 12.6283 35.0371 11.9313 33.5013 11.9313C32.8188 11.9313 32.2423 12.0893 31.7903 12.3867C31.3383 12.684 31.1077 13.1068 31.1077 13.6318V13.6132L31.1123 13.6086Z"/>
+      <path d="M54.555 28.9177C51.4649 28.9177 48.8638 27.8677 46.8022 25.7815C44.7269 23.6954 43.6938 21.1028 43.6938 18.0224C43.6938 14.942 44.7222 12.3448 46.8022 10.2634C48.8822 8.17724 51.4649 7.12721 54.555 7.12721C56.5612 7.12721 58.3783 7.60111 60.0201 8.56287C61.662 9.52462 62.9211 10.8209 63.7558 12.4331L59.1992 15.1139C58.7795 14.2544 58.1707 13.59 57.3314 13.0975C56.492 12.605 55.5511 12.3634 54.5181 12.3634C52.9269 12.3634 51.6171 12.8884 50.5702 13.9571C49.5233 15.0071 48.9975 16.3731 48.9975 18.0224C48.9975 19.6718 49.5233 20.982 50.5702 22.0507C51.6171 23.1007 52.9269 23.6443 54.5181 23.6443C55.5834 23.6443 56.5427 23.398 57.3821 22.9241C58.2215 22.4502 58.8487 21.7672 59.2499 20.9263L63.8619 23.57C62.9534 25.2008 61.6804 26.497 60.0386 27.4774C58.3967 28.4577 56.5658 28.9502 54.5734 28.9502L54.555 28.913V28.9177Z"/>
+      <path d="M70.6738 20.2294C71.3886 22.8219 73.3303 24.0996 76.471 24.0996C78.4957 24.0996 80.0361 23.4166 81.083 22.0321L85.3629 24.5038C83.3382 27.4449 80.3497 28.9177 76.388 28.9177C72.9844 28.9177 70.2587 27.8862 68.1972 25.8187C66.1356 23.7512 65.1071 21.1586 65.1071 18.0224C65.1071 14.8863 66.1218 12.3309 68.1464 10.2448C70.1711 8.15865 72.7722 7.12721 75.9683 7.12721C78.9892 7.12721 81.4704 8.17724 83.4443 10.2634C85.3998 12.3495 86.3775 14.942 86.3775 18.0224C86.3775 18.7054 86.3083 19.4395 86.1654 20.2108H70.66L70.6784 20.2294H70.6738ZM70.5862 16.0943H81.083C80.7878 14.6912 80.156 13.6411 79.2151 12.9581C78.2743 12.2751 77.1905 11.9267 75.9822 11.9267C74.5524 11.9267 73.381 12.2937 72.4355 13.0139C71.5085 13.748 70.8813 14.7655 70.5862 16.0804V16.0989V16.0943Z"/>
+      <path d="M101.505 7.15973C103.811 7.15973 105.716 7.93099 107.214 9.48745C108.718 11.0486 109.465 13.1858 109.465 15.9177V28.9177H104.018V16.6007C104.018 15.1836 103.636 14.115 102.884 13.3623C102.114 12.6097 101.104 12.2426 99.8445 12.2426C98.4286 12.2426 97.3125 12.6794 96.4731 13.5575C95.6337 14.4356 95.2002 15.7458 95.2002 17.4974V28.9363H89.7535V7.75444H95.2002V10.1193C96.5285 8.14007 98.6223 7.15973 101.486 7.15973H101.505Z"/>
+      <path d="M123.213 12.4889V7.1969H118.412V1.56576L112.929 3.31271V21.665C112.929 24.5921 113.713 26.6225 115.253 27.7608C116.789 28.8991 119.445 29.2476 123.218 28.8294V23.8348C122.171 23.8859 121.295 23.8859 120.58 23.8534C119.883 23.8023 119.339 23.6071 118.975 23.2772C118.606 22.9427 118.417 22.3991 118.417 21.665V12.4889H123.218H123.213Z"/>
+      <path d="M155.806 7.15973V28.9688H150.359V25.9906C149.031 27.9699 146.937 28.9688 144.055 28.9688C141.749 28.9688 139.83 28.1975 138.327 26.6411C136.823 25.08 136.058 22.9288 136.058 20.1968V7.15973H141.504V19.5092C141.504 20.9263 141.887 22.0135 142.639 22.7522C143.409 23.5049 144.419 23.872 145.678 23.872C147.094 23.872 148.21 23.4352 149.068 22.5571C149.907 21.679 150.341 20.3688 150.341 18.6172V7.15973H155.806Z"/>
+      <path d="M183.035 7.15973C185.447 7.15973 187.384 7.94958 188.832 9.52462C190.281 11.0997 191 13.223 191 15.8666V28.8805H185.567V16.2523C185.567 14.9931 185.253 13.9942 184.64 13.2927C184.027 12.5911 183.155 12.2426 182.021 12.2426C180.78 12.2426 179.821 12.6468 179.138 13.4692C178.455 14.2916 178.11 15.4671 178.11 17.0235V28.8991H172.677V16.2708C172.677 15.0117 172.363 14.0128 171.75 13.3112C171.136 12.6097 170.265 12.2612 169.13 12.2612C167.926 12.2612 166.962 12.6654 166.248 13.4878C165.533 14.3102 165.164 15.4856 165.164 17.0421V28.9177H159.731V7.75444H165.164V9.99853C166.423 8.10754 168.378 7.15973 171.012 7.15973C173.645 7.15973 175.499 8.17724 176.74 10.2076C178.137 8.17724 180.231 7.15973 183.007 7.15973H183.035Z"/>
+      <path d="M126.691 28.9688V7.1365H132.174V28.9688H126.691Z"/>
+      <path d="M132.114 0H127.074V3.02H129.107V5.07825H132.114V0Z"/>
+      <path d="M13.1579 7.15973V12.5075H16.6953V16.0711H22.0037V7.15973H13.1579Z" fill="#FF6611"/>
+      <path d="M16.3033 20.2294C16.0358 20.9774 15.63 21.6418 15.0535 22.204C13.9696 23.2912 12.6091 23.8348 10.9673 23.8348C9.3254 23.8348 7.96487 23.2912 6.8995 22.204C5.83414 21.1168 5.29454 19.7183 5.29454 18.0178C5.29454 16.3173 5.83414 14.9188 6.8995 13.8316C7.50828 13.2044 8.23236 12.7723 9.03484 12.5075V7.20619H8.73507C6.52593 7.48031 4.59352 8.50247 2.93782 10.2727C0.977737 12.382 0 14.956 0 18.0224C0 21.0889 0.977737 23.6443 2.93321 25.7629C4.88869 27.863 7.2454 28.9177 9.98952 28.9177C12.872 28.9177 15.1042 27.9188 16.6953 25.907V28.9177H22.0037V20.234H16.3033V20.2294Z"/>
+    </symbol>
+    <symbol id="zv-logo" viewBox="0 0 161 49">
+      <path d="M70.2793 37.5381H58.2793V35.6381L68.8703 21.5971H58.5823V21.0051C58.5823 20.4892 58.7872 19.9945 59.152 19.6297C59.5167 19.265 60.0114 19.0601 60.5273 19.0601H72.6483V21.2661L62.4703 35.0011H72.7853V35.0301C72.7853 35.6952 72.5211 36.3331 72.0507 36.8035C71.5804 37.2738 70.9424 37.5381 70.2773 37.5381"/>
+      <path d="M92.1138 21.384C93.0515 22.2727 93.79 23.3503 94.2802 24.5456C94.7705 25.741 95.0014 27.0267 94.9578 28.318C94.9997 29.6134 94.7661 30.9029 94.2726 32.1013C93.779 33.2997 93.0367 34.3798 92.0948 35.27C91.1655 36.1598 90.0699 36.8576 88.8707 37.3235C87.6714 37.7894 86.392 38.0142 85.1058 37.985C82.4907 38.0464 79.9575 37.0703 78.0598 35.27C77.113 34.3825 76.3663 33.3035 75.8695 32.1047C75.3727 30.9059 75.1372 29.615 75.1788 28.318C75.136 27.0235 75.371 25.7349 75.868 24.5388C76.3649 23.3427 77.1123 22.267 78.0598 21.384C79.9617 19.592 82.4934 18.6219 85.1058 18.684C86.3941 18.6511 87.6761 18.8727 88.8787 19.336C90.0812 19.7993 91.1805 20.4952 92.1138 21.384V21.384ZM89.3808 32.872C89.985 32.2818 90.4592 31.5718 90.773 30.7875C91.0868 30.0033 91.2332 29.1621 91.2028 28.318C91.2331 27.4738 91.0867 26.6327 90.7729 25.8485C90.4592 25.0642 89.985 24.3542 89.3808 23.764C88.8224 23.1989 88.1564 22.7514 87.4221 22.4481C86.6878 22.1448 85.9002 21.9917 85.1058 21.998C84.302 21.9855 83.504 22.1355 82.7596 22.439C82.0152 22.7424 81.3398 23.1931 80.7738 23.764C80.1754 24.3575 79.7065 25.0686 79.3967 25.8524C79.0869 26.6362 78.9429 27.4757 78.9738 28.318C78.9429 29.1602 79.0869 29.9997 79.3967 30.7835C79.7065 31.5673 80.1754 32.2784 80.7738 32.872C81.3398 33.4428 82.0152 33.8935 82.7596 34.197C83.504 34.5004 84.302 34.6504 85.1058 34.638C85.9002 34.6442 86.6878 34.4912 87.4221 34.1879C88.1564 33.8845 88.8224 33.4371 89.3808 32.872"/>
+      <path d="M97.5332 37.5379V11.1379H101.399V35.0299C101.399 35.3592 101.335 35.6854 101.209 35.9896C101.083 36.2939 100.898 36.5704 100.665 36.8033C100.432 37.0362 100.156 37.221 99.8518 37.347C99.5476 37.4731 99.2215 37.5379 98.8922 37.5379H97.5332Z"/>
+      <path d="M116.022 37.5381H111.894L103.975 19.0601H106.05C106.679 19.0608 107.295 19.2474 107.819 19.5964C108.343 19.9454 108.753 20.4413 108.997 21.0221L113.976 32.9281L118.955 21.0221C119.198 20.4412 119.608 19.9451 120.132 19.5961C120.657 19.2471 121.273 19.0606 121.903 19.0601H123.977L116.022 37.5381Z"/>
+      <path d="M130.793 11.8471C131.021 12.0688 131.201 12.3349 131.323 12.629C131.444 12.9231 131.504 13.2389 131.499 13.5571C131.509 13.8743 131.454 14.1902 131.335 14.4846C131.217 14.779 131.038 15.0455 130.811 15.2671C130.576 15.491 130.299 15.6656 129.996 15.7805C129.692 15.8954 129.369 15.9483 129.045 15.9361C128.718 15.9472 128.392 15.8939 128.086 15.7791C127.78 15.6643 127.5 15.4903 127.261 15.2671C127.029 15.0483 126.846 14.7828 126.724 14.488C126.602 14.1932 126.544 13.8759 126.554 13.5571C126.549 13.2389 126.609 12.9229 126.73 12.6288C126.852 12.3347 127.032 12.0687 127.261 11.8471C127.494 11.6139 127.773 11.431 128.08 11.3095C128.387 11.1881 128.715 11.1308 129.045 11.1411C129.369 11.1331 129.691 11.1917 129.992 11.3131C130.293 11.4345 130.565 11.6163 130.793 11.8471V11.8471ZM127.112 37.5371V19.0971H130.978V34.4381C130.978 35.2602 130.651 36.0487 130.07 36.6301C129.488 37.2115 128.7 37.5381 127.878 37.5381L127.112 37.5371Z"/>
+      <path d="M149.503 36.646C148.135 37.5217 146.554 38.0097 144.93 38.058C144.044 38.1067 143.157 37.9789 142.321 37.6821C141.485 37.3853 140.716 36.9253 140.059 36.329C139.43 35.6506 138.946 34.8501 138.639 33.977C138.332 33.104 138.208 32.1771 138.274 31.254V22.291H134.074V19.091H138.274V13.366H142.14V19.091H148.607L148.599 19.258C148.562 20.0741 148.211 20.8445 147.621 21.4088C147.03 21.9732 146.244 22.288 145.427 22.288H142.14V30.988C142.076 31.9105 142.369 32.8226 142.958 33.535C143.247 33.8307 143.595 34.0616 143.98 34.2123C144.364 34.363 144.777 34.4301 145.189 34.409C146.307 34.3937 147.394 34.0456 148.312 33.409L149.503 36.646Z"/>
+      <path d="M21.7651 7.042L-0.00390624 0V8.5C-0.00397113 9.28495 0.244734 10.0497 0.706482 10.6845C1.16823 11.3193 1.81927 11.7914 2.5661 12.033L24.1751 19.025V10.357C24.175 9.61955 23.9412 8.9011 23.5073 8.3048C23.0734 7.7085 22.4617 7.26501 21.7601 7.038" fill="#FDD106"/>
+      <path d="M46.0836 36.886L24.1836 29.993V38.708C24.1836 39.4314 24.4143 40.1358 24.8421 40.719C25.27 41.3023 25.8727 41.7338 26.5626 41.951L48.3996 48.823V40.041C48.4007 39.3369 48.1765 38.6508 47.7598 38.0831C47.3431 37.5155 46.7557 37.096 46.0836 36.886" fill="#FDD106"/>
+      <path d="M36.35 25.095L8.875 36.357V27.578C8.87495 26.86 9.08851 26.1583 9.48846 25.5621C9.88842 24.9659 10.4567 24.5022 11.121 24.23L39.485 12.601V20.418C39.4857 21.4207 39.1879 22.4009 38.6296 23.2338C38.0713 24.0667 37.2778 24.7146 36.35 25.095" fill="#FDD106"/>
+    </symbol>
+    <symbol id="i-build" viewBox="0 0 24 24"><path d="M3 21h18M5 21V8l7-4 7 4v13M9 21v-6h6v6M9 11h.01M15 11h.01" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3z M9 12l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-calc" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 7h8M8 12h.01M12 12h.01M16 12h.01M8 16h.01M12 16h.01M16 16h.01" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8l-5-5zM14 3v5h5M9 13h6M9 17h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M8 11V8a4 4 0 018 0v3" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 01-11.6 7.1L4 20l1-4.6A8 8 0 1121 12z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+    <symbol id="i-dash" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M7 15l3-3 3 2 4-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0112 0v5l2 2H4l2-2zM10 21h4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 12 12"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="f-sg" viewBox="0 0 30 20"><rect width="30" height="10" fill="#EF3340"/><rect y="10" width="30" height="10" fill="#fff"/><circle cx="7" cy="5" r="3.2" fill="#fff"/><circle cx="8.3" cy="5" r="3" fill="#EF3340"/></symbol>
+    <symbol id="f-hk" viewBox="0 0 30 20"><rect width="30" height="20" fill="#DE2910"/><circle cx="15" cy="10" r="4.5" fill="none" stroke="#fff" stroke-width="1.6" stroke-dasharray="3 2.6"/></symbol>
+  </defs>
+</svg>
+<div class="topbar"><div class="container"><span><b>AI Studio prototype:</b> Global IP, AI-fied. Not a live service.</span><a href="https://ascentium-sme.vercel.app/" target="_blank" rel="noopener">Back to the website ↗</a></div></div>
+<header><div class="container">
+  <a class="brand" href="https://ascentium-sme.vercel.app/" target="_blank" rel="noopener" aria-label="Ascentium powered by Zolvit">
+    <svg class="asc" viewBox="0 0 191 29" fill="#0F1514" role="img" aria-label="Ascentium"><use href="#asc-logo"/></svg>
+    <span class="sep"></span>
+    <span class="pw"><small>Powered by</small><svg viewBox="0 0 161 49" fill="#022B50" aria-hidden="true"><use href="#zv-logo"/></svg></span>
+    <span class="studio">AI Studio · IP</span>
+  </a>
+  <a class="btn ghost" style="margin-left:auto" href="/incorporation/">Incorporation prototype ↗</a>
+  <div class="hdr-cta"><a class="btn gold" href="https://ascentium-sme.vercel.app/#ascentia" target="_blank" rel="noopener">Talk to Ascentia</a></div>
+</div></header>
+<section class="phero"><div class="container">
+  <div class="crumbs"><a href="https://ascentium-sme.vercel.app/" target="_blank" rel="noopener">Home</a><span>/</span><span>AI Studio</span><span>/</span><span id="crumb">Global IP</span></div>
+  <span class="pill"><i></i>AI drafts · Experts decide</span>
+  <h1 id="heroT">Protect your brand in 130+ countries, <em>AI-fied.</em></h1>
+  <p id="heroP">Six steps from SME check to a first-year calendar. AI reads, drafts and tracks; an Ascentium expert signs off every filing.</p>
+</div></section>
+
+<div class="wrap">
+  <nav class="steps" aria-label="Steps" id="steps"></nav>
+  <main class="main" id="main" aria-live="polite"></main>
+  <aside class="side">
+    <div class="card asc-card"><h2>Ascentia is online</h2><p>Ask anything about your company or your brand, any time.</p><a class="btn gold" href="https://ascentium-sme.vercel.app/#ascentia" target="_blank" rel="noopener">Talk to Ascentia</a></div>
+    <div class="card"><h2>AI activity <span class="ai">AI</span></h2><div class="feed" id="feed"><p class="empty">AI actions will appear here as you go.</p></div></div>
+    <div class="card"><h2>Expert queue <span class="ex">Expert</span></h2><div class="queue" id="queue"><p class="empty">Nothing waiting for an expert yet.</p></div></div>
+  </aside>
+</div>
+
+<footer><div class="container"><div class="fb"><svg viewBox="0 0 191 29" fill="#fff" aria-label="Ascentium"><use href="#asc-logo"/></svg><span>powered by</span><svg viewBox="0 0 161 49" fill="#fff" aria-label="Zolvit"><use href="#zv-logo"/></svg></div><span>Concept prototype prepared by Zolvit for Ascentium. Simulated AI; pricing indicative.</span></div></footer>
+<dialog id="dlg"><div class="dlg"><h3 id="dlgT"></h3><pre id="dlgB"></pre><div class="row" style="justify-content:flex-end"><button class="btn ghost" id="dlgX">Close</button></div></div></dialog>
+
+<script>
+/* ------------ state ------------ */
+const S={tab:'ip',inc:0,ip:0,
+  market:'sg',sector:'svc',emp:12,rev:2,
+  name:'Northwind Labs',nameRes:null,
+  director:'Jane Tan',kyc:{passport:false,address:false,addrOld:true},
+  docs:{},filing:0,fye:12,
+  mark:'NORTHWIND',desc:'Clothing and an online shop selling our apparel',classes:[],ipMk:['my','id','vn','cn','au','us','hk'],clear:null,ipSubmitted:false};
+const $=s=>document.querySelector(s);
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const fmt=n=>Math.round(n).toLocaleString('en-SG');
+const now=()=>new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+function hash(s){let h=2166136261;for(const c of s)h=(h^c.charCodeAt(0))*16777619>>>0;return h}
+
+/* ------------ markets ------------ */
+const MK={
+ sg:{n:'Singapore',suf:'Pte. Ltd.',cur:'S$',reg:'ACRA',test:(e,r)=>e<=200||r<=100?[1,'Within 200 employees or S$100 million in revenue (Enterprise Singapore).']:[0,'Above both Singapore SME limits.']},
+ hk:{n:'Hong Kong SAR',suf:'Limited',cur:'HK$',reg:'the Companies Registry',sec:true,test:(e,r,s)=>(s==='mfg'?e<100:e<50)?[1,`Fewer than ${s==='mfg'?100:50} employees in Hong Kong.`]:[0,'Hong Kong counts headcount only, and this is above the limit.']},
+ my:{n:'Malaysia',suf:'Sdn. Bhd.',cur:'RM',reg:'SSM',sec:true,test:(e,r,s)=>{const[E,R]=s==='mfg'?[200,50]:[75,20];return e<=E||r<=R?[1,`Within ${E} employees or RM${R} million (SME Corp. Malaysia).`]:[0,'Above both Malaysian SME limits.']}},
+ ae:{n:'United Arab Emirates',suf:'FZ-LLC',cur:'AED',reg:'the free zone authority',test:(e,r)=>e<=200&&r<=250?[1,'Up to 200 employees and AED 250 million turnover.']:[0,'Above the UAE SME limits.']},
+ uk:{n:'United Kingdom',suf:'Ltd',cur:'£',reg:'Companies House',test:(e,r)=>e<=250&&r<=54?[1,'Within the medium-sized company tests.']:(e<=250||r<=54)?[2,'Passes one test; the balance-sheet test decides it.']:[0,'Above the medium-sized limits.']},
+ au:{n:'Australia',suf:'Pty Ltd',cur:'A$',reg:'ASIC',test:(e,r)=>r<10?[1,'A small business entity: turnover under A$10 million.']:(r<50&&e<100)?[1,'A small proprietary company.']:[2,'The gross-assets test decides it.']}
+};
+const SECTORS=[['svc','Services and other'],['mfg','Manufacturing']];
+
+/* ------------ IP pricing (Ascentium sheet, SGD) and WIPO fees (CHF) ------------ */
+const IPM={
+ sg:{n:'Singapore',o:310,p:950,m:null,home:true},hk:{n:'Hong Kong SAR',o:725,p:500,m:null,nat:true},
+ cn:{n:'Chinese Mainland',o:450,p:500,m:[220,110]},my:{n:'Malaysia',o:750,p:600,m:[221,221]},
+ id:{n:'Indonesia',o:929.5,p:650,m:[125,125]},ph:{n:'Philippines',o:975,p:600,m:[74,74]},
+ vn:{n:'Vietnam',o:645,p:500,m:[109,109]},au:{n:'Australia',o:535,p:480,m:[217,217]},
+ ae:{n:'United Arab Emirates',o:265,p:700,m:[1420,1420]},de:{n:'Germany',o:420,p:990,m:[100,0]},
+ us:{n:'United States',o:450,p:470,m:[460,460]},br:{n:'Brazil',o:875,p:570,m:[251,251]}
+};
+const CHF=1.59, MADF=756, BASIC=653;
+const NICE=[[/cloth|apparel|fashion|wear|shoe|bag/i,25,'Clothing, footwear and headwear'],[/shop|store|retail|e-?commerce|online sale|selling/i,35,'Retail and online store services'],[/app|software|platform|saas|digital/i,9,'Software and apps'],[/software|saas|platform|it service|cloud/i,42,'Software as a service, IT services'],[/caf[eé]|restaurant|food|bakery|coffee/i,43,'Restaurant and café services'],[/coffee|tea|snack|bakery|chocolate/i,30,'Coffee, tea, bakery goods'],[/cosmetic|skincare|beauty|perfume/i,3,'Cosmetics and skincare'],[/consult|advis|marketing|agency/i,35,'Business consulting and marketing'],[/education|course|training|school/i,41,'Education and training'],[/payment|fintech|finance|insurance/i,36,'Financial services']];
+
+/* ------------ feed / queue ------------ */
+const FEED=[],QUEUE=[];
+function log(t,kind='a'){FEED.unshift({t,kind,at:now()});drawSide()}
+function enqueue(t){if(!QUEUE.find(q=>q.t===t)){QUEUE.push({t,st:'Waiting'});drawSide()}}
+function approve(t,by){const q=QUEUE.find(q=>q.t===t);if(q){q.st='Approved';log(`${by} approved: ${t}`,'e');drawSide()}}
+function drawSide(){
+  $('#feed').innerHTML=FEED.length?FEED.map(f=>`<div class="it ${f.kind==='e'?'e':''}">${esc(f.t)}<small>${f.kind==='e'?'Expert':'AI'} · ${f.at}</small></div>`).join(''):'<p class="empty">AI actions will appear here as you go.</p>';
+  $('#queue').innerHTML=QUEUE.length?QUEUE.map(q=>`<div><span>${esc(q.t)}</span><span class="tag ${q.st==='Approved'?'good':'warn'}">${q.st}</span></div>`).join(''):'<p class="empty">Nothing waiting for an expert yet.</p>';
+}
+function thinking(el,label,ms,done){el.innerHTML=`<div class="think"><span class="dots"><i></i><i></i><i></i></span>${esc(label)}</div>`;setTimeout(done,ms)}
+
+/* ------------ steps ------------ */
+const INC=[['Qualify','SME check'],['Name','Availability'],['KYC','Document AI'],['Documents','AI drafts'],['File','Registry tracking'],['Year one','Compliance calendar']];
+const IP=[['Your mark','Classes by AI'],['Clearance','AI search'],['Route and price','National or Madrid'],['File','Specialist review'],['Watch and renew','Portfolio']];
+function drawSteps(){
+  const list=S.tab==='inc'?INC:IP, cur=S[S.tab];
+  $('#steps').innerHTML=`<h2>${S.tab==='inc'?'INCORPORATION':'GLOBAL IP'}</h2>`+list.map(([t,s],i)=>`<button class="step ${i<cur?'done':''}" ${i===cur?'aria-current="step"':''} data-go="${i}"><span class="n">${i<cur?'✓':i+1}</span><span>${t}<small>${s}</small></span></button>`).join('');
+}
+function go(i){S[S.tab]=i;render();window.scrollTo({top:0,behavior:'smooth'})}
+function navBtns(i,last,nextLabel){return `<div class="nav"><button class="btn ghost" data-go="${i-1}" ${i===0?'disabled':''}>Back</button>${last?'':`<button class="btn gold" data-go="${i+1}">${nextLabel||'Continue'} →</button>`}</div>`}
+function split(ai,ex){return `<div class="split-ai"><div class="a"><b>AI did</b>${ai}</div><div class="x"><b>Expert does</b>${ex}</div></div>`}
+
+/* ------------ incorporation views ------------ */
+function vQualify(){
+  const m=MK[S.market];
+  return `<div class="card"><span class="eyebrow">Step 1 · Qualify</span><h1>Do you qualify for SME fares?</h1><p class="lead">AI applies the official SME test for the market you choose and explains the answer.</p>
+  <div class="split"><div class="field"><label for="mk">Market</label><select id="mk">${Object.entries(MK).map(([k,v])=>`<option value="${k}" ${k===S.market?'selected':''}>${v.n}</option>`).join('')}</select></div>
+  ${m.sec?`<div class="field"><label for="sec">Sector</label><select id="sec">${SECTORS.map(([k,l])=>`<option value="${k}" ${k===S.sector?'selected':''}>${l}</option>`).join('')}</select></div>`:'<div></div>'}
+  <div class="field"><label for="emp">Employees, including group companies</label><input id="emp" type="number" min="0" value="${S.emp}"></div>
+  <div class="field"><label for="rev">Annual revenue (${m.cur} million)</label><input id="rev" type="number" min="0" step="0.1" value="${S.rev}"></div></div>
+  <button class="btn" id="qBtn"><span class="ai">AI</span> Check eligibility</button><div id="qOut"></div>${navBtns(0)}</div>`;
+}
+function wQualify(){
+  $('#mk').onchange=e=>{S.market=e.target.value;render()};
+  const sec=$('#sec');if(sec)sec.onchange=e=>S.sector=e.target.value;
+  $('#emp').oninput=e=>S.emp=+e.target.value;$('#rev').oninput=e=>S.rev=+e.target.value;
+  $('#qBtn').onclick=()=>thinking($('#qOut'),'Reading the official SME definition…',900,()=>{
+    const m=MK[S.market],[ok,why]=m.test(S.emp,S.rev,S.sector);
+    const cls=['bad','good','warn'][ok],t=['Above the SME thresholds','You qualify for SME fares','You may qualify'][ok];
+    $('#qOut').innerHTML=`<div class="result ${cls}"><h3>${t}</h3><p>${esc(why)}</p></div>`+split('Applied the '+m.n+' SME test to your headcount and revenue.',ok===2?'Confirms the edge case with your accounts.':'Nothing needed unless your numbers change.');
+    log(`SME test for ${m.n}: ${t}`);if(ok===2)enqueue('Confirm SME status');
+  });
+}
+function vName(){
+  const m=MK[S.market];
+  return `<div class="card"><span class="eyebrow">Step 2 · Name</span><h1>Is your company name available?</h1><p class="lead">AI checks the register for identical and similar names, flags restricted words and suggests alternatives.</p>
+  <div class="field"><label for="nm">Proposed name</label><div class="row"><input id="nm" value="${esc(S.name)}" style="flex:1"><span class="tag info">${esc(m.suf)}</span></div></div>
+  <button class="btn" id="nBtn"><span class="ai">AI</span> Check with ${esc(m.reg)}</button><div id="nOut"></div>${navBtns(1)}</div>`;
+}
+function wName(){
+  $('#nm').oninput=e=>S.name=e.target.value;
+  $('#nBtn').onclick=()=>thinking($('#nOut'),'Searching the register for similar names…',1100,()=>{
+    const n=S.name.trim()||'Untitled',m=MK[S.market],h=hash(n.toLowerCase()),restricted=/\b(bank|insurance|university|trust|government|finance)\b/i.test(n);
+    const base=n.split(' ')[0];
+    const sims=[[`${base} Holdings ${m.suf}`,58+h%20],[`${n.replace(/s\b/,'')} ${m.suf}`,70+h%18],[`${base}wind Trading ${m.suf}`,41+h%15]].sort((a,b)=>b[1]-a[1]);
+    const top=sims[0][1],cls=restricted?'warn':top>=85?'bad':'good';
+    const title=restricted?'Available, but needs approval':top>=85?'Too close to an existing name':'Available';
+    const why=restricted?'The name includes a restricted word, so the registry will refer it for approval.':top>=85?`“${sims[0][0]}” is ${top}% similar. Registries usually reject names this close.`:`The closest match is ${top}% similar, below the usual rejection range.`;
+    $('#nOut').innerHTML=`<div class="result ${cls}"><h3>${title}: ${esc(n)} ${esc(m.suf)}</h3><p>${esc(why)}</p></div>
+    <div class="tbl"><table><tr><th>Similar names on the register</th><th>Similarity</th></tr>${sims.map(([s,p])=>`<tr><td>${esc(s)}</td><td><span class="tag ${p>=85?'bad':p>=70?'warn':'good'}">${p}%</span></td></tr>`).join('')}</table></div>
+    ${cls!=='good'?`<p class="note">Suggestions: ${['Labs','Studio','Collective'].map(x=>esc(base+' '+x)).join(' · ')}</p>`:''}`+split('Searched the register, scored similar names and checked restricted words.','Advises on the name and reserves it.');
+    S.nameRes=cls;log(`Name check “${n}”: ${title.toLowerCase()}`);enqueue('Reserve company name');
+  });
+}
+function vKyc(){
+  const k=S.kyc;
+  return `<div class="card"><span class="eyebrow">Step 3 · KYC</span><h1>Identity documents, read by AI</h1><p class="lead">Upload a passport and a proof of address. AI reads them, fills in the details and flags anything missing.</p>
+  <div class="field"><label for="dir">Director’s name</label><input id="dir" value="${esc(S.director)}"></div>
+  <div class="docs">
+   <div class="doc"><div><b>Passport</b><small>${k.passport?'Read by AI':'Not uploaded'}</small></div><button class="btn ${k.passport?'ghost':''}" id="pBtn">${k.passport?'Re-upload':'Upload sample passport'}</button></div>
+   <div class="doc"><div><b>Proof of address</b><small>${k.address?(k.addrOld?'Flagged by AI':'Read by AI'):'Not uploaded'}</small></div><button class="btn ${k.address?'ghost':''}" id="aBtn">${k.address?'Re-upload':'Upload sample bill'}</button></div>
+  </div><div id="kOut">${kycResult()}</div>${navBtns(2)}</div>`;
+}
+function kycResult(){
+  const k=S.kyc;if(!k.passport&&!k.address)return '';
+  const rows=[];
+  if(k.passport){const h=hash(S.director);rows.push(['Full name',esc(S.director),'good'],['Nationality','Singaporean','good'],['Passport number','K•••'+(1000+h%9000),'good'],['Expiry date','14 Mar 2031','good'])}
+  if(k.address)rows.push(['Address','12 Marina Boulevard, Singapore 018982',k.addrOld?'warn':'good'],['Document date',k.addrOld?'5 months ago':'Last month',k.addrOld?'warn':'good']);
+  const flag=k.address&&k.addrOld;
+  return `<div class="tbl"><table><tr><th>Field</th><th>Extracted value</th><th>Check</th></tr>${rows.map(([a,b,c])=>`<tr><td>${a}</td><td>${b}</td><td><span class="tag ${c}">${c==='good'?'OK':'Check'}</span></td></tr>`).join('')}</table></div>
+  ${flag?`<div class="result warn"><h3>Proof of address is older than 3 months</h3><p>Most registries and banks need a document dated within the last 3 months.</p><div class="row" style="margin-top:10px"><button class="btn" id="reqBtn">Request a newer bill on WhatsApp</button></div></div>`:''}
+  ${k.passport&&k.address&&!k.addrOld?`<div class="result good"><h3>KYC complete</h3><p>Both documents are read and valid. Sent to an expert for identity approval.</p></div>`:''}`;
+}
+function wKyc(){
+  $('#dir').oninput=e=>S.director=e.target.value;
+  $('#pBtn').onclick=()=>thinking($('#kOut'),'Reading passport…',900,()=>{S.kyc.passport=true;log('Read passport: name, nationality, number and expiry');render()});
+  $('#aBtn').onclick=()=>thinking($('#kOut'),'Reading proof of address…',900,()=>{S.kyc.address=true;log(S.kyc.addrOld?'Proof of address flagged: older than 3 months':'Proof of address read');render()});
+  const r=$('#reqBtn');if(r)r.onclick=()=>thinking($('#kOut'),'Sending a WhatsApp request and waiting for the new bill…',1200,()=>{S.kyc.addrOld=false;log('Ascentia requested a newer bill on WhatsApp; new bill read');enqueue('Approve director identity');render()});
+}
+const DOCS=[['constitution','Constitution','Model constitution with one-director provisions'],['res','First board resolutions','Appointing the secretary, auditor and bank'],['shares','Share allotment','1,000 ordinary shares to the founder'],['consent','Consent to act as director','Signed electronically by '+'the director']];
+function vDocs(){
+  return `<div class="card"><span class="eyebrow">Step 4 · Documents</span><h1>Your incorporation pack, drafted by AI</h1><p class="lead">AI drafts every document from your answers. A company secretary reviews and signs before anything is filed.</p>
+  <div class="docs">${DOCS.map(([k,t,d])=>{const st=S.docs[k]||'draft';return `<div class="doc"><div><b>${t}</b><small>${esc(d)}</small></div><div class="row"><span class="tag ${st==='approved'?'good':st==='review'?'warn':'info'}">${st==='approved'?'Approved by expert':st==='review'?'With expert':'AI draft ready'}</span><button class="btn ghost" data-view="${k}">View</button></div></div>`}).join('')}</div>
+  <div class="row" style="margin-top:14px"><button class="btn" id="sendDocs" ${Object.values(S.docs).length&&Object.values(S.docs).every(v=>v!=='draft')?'disabled':''}>Send all to the company secretary</button></div>
+  <div id="dOut"></div>${split('Drafted 4 documents from your answers in seconds.','Reviews, adjusts and signs as company secretary.')}${navBtns(3)}</div>`;
+}
+function wDocs(){
+  document.querySelectorAll('[data-view]').forEach(b=>b.onclick=()=>{
+    const k=b.dataset.view,m=MK[S.market],n=`${S.name} ${m.suf}`;
+    const body={constitution:`CONSTITUTION OF ${n.toUpperCase()}\n\n1. Name. The name of the company is ${n}.\n2. Liability. The liability of members is limited.\n3. Directors. The company shall have at least one director, who may act alone.\n4. Shares. Shares may be issued by ordinary resolution of the directors.\n\n[AI draft. To be reviewed by an Ascentium company secretary.]`,
+     res:`WRITTEN RESOLUTIONS OF THE BOARD OF ${n.toUpperCase()}\n\nRESOLVED that Ascentium be appointed company secretary.\nRESOLVED that a business account be opened.\nRESOLVED that the financial year end be the last day of ${new Date(2026,S.fye-1).toLocaleString('en',{month:'long'})}.\n\nDirector: ${S.director}`,
+     shares:`ALLOTMENT OF SHARES\n\n1,000 ordinary shares allotted to ${S.director} at 1.00 each, fully paid.`,
+     consent:`CONSENT TO ACT AS DIRECTOR\n\nI, ${S.director}, consent to act as a director of ${n}.`}[k];
+    $('#dlgT').textContent=DOCS.find(d=>d[0]===k)[1];$('#dlgB').textContent=body;$('#dlg').showModal();
+  });
+  $('#sendDocs').onclick=()=>{DOCS.forEach(([k])=>S.docs[k]='review');log('Drafted constitution, resolutions, allotment and consent');enqueue('Review incorporation pack');render();
+    setTimeout(()=>{DOCS.forEach(([k])=>S.docs[k]='approved');approve('Review incorporation pack','Company secretary');if(S.tab==='inc'&&S.inc===3)render()},2200)};
+}
+const FIL=['Submitted to the registry','Name and documents checked','Approved by the registry','Registration number issued'];
+function vFile(){
+  const m=MK[S.market];
+  return `<div class="card"><span class="eyebrow">Step 5 · File</span><h1>Filing with ${esc(m.reg)}, tracked live</h1><p class="lead">An expert submits as filing agent. AI watches the registry and updates you at every stage.</p>
+  <div class="timeline">${FIL.map((t,i)=>`<div class="tl ${i<S.filing?'ok':i===S.filing?'on':''}"><span class="dot">${i<S.filing?'✓':i+1}</span><div><b>${t}</b><small>${i<S.filing?'Done':i===S.filing?'In progress':'Waiting'}</small></div></div>`).join('')}</div>
+  ${S.filing>=FIL.length?`<div class="cert"><span class="tag good">Incorporated</span><p style="margin-top:8px"><b>${esc(S.name)} ${esc(m.suf)}</b></p><p class="note">Registration number ${2026}${String(hash(S.name)%100000).padStart(5,'0')}X · Registered with ${esc(m.reg)}</p></div>`:`<button class="btn" id="fBtn"><span class="ai">AI</span> Check registry status</button>`}
+  ${split('Checks the registry and tells you the moment anything changes.','Submits the filing and answers any registry query.')}${navBtns(4)}</div>`;
+}
+function wFile(){const b=$('#fBtn');if(b)b.onclick=()=>thinking(b.parentElement.querySelector('.timeline').nextElementSibling,'Checking the registry…',800,()=>{if(S.filing===0)enqueue('Submit filing as agent');S.filing++;log(`Registry update: ${FIL[S.filing-1].toLowerCase()}`);if(S.filing===1)approve('Submit filing as agent','Filing agent');render()})}
+function cal(){
+  const fye=new Date(2026,S.fye,0),add=(d,mo)=>{const x=new Date(d);x.setMonth(x.getMonth()+mo);return x},f=d=>d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+  const set={sg:[['Estimated Chargeable Income','IRAS',add(fye,3)],['Annual General Meeting','ACRA',add(fye,6)],['Annual return','ACRA',add(fye,7)],['Form C-S','IRAS',new Date(2027,10,30)]],
+   hk:[['Annual return (NAR1)','Companies Registry',new Date(2027,0,15)],['Business Registration renewal','IRD',new Date(2027,10,1)],['First profits tax return','IRD',add(new Date(),18)]],
+   my:[['Annual return','SSM',add(new Date(),12)],['Financial statements lodged','SSM',add(fye,7)],['Form C','LHDN',add(fye,7)]],
+   ae:[['Trade licence renewal','Free zone',add(new Date(),12)],['Corporate tax return','FTA',add(fye,9)]],
+   uk:[['Confirmation statement','Companies House',add(new Date(),12)],['First annual accounts','Companies House',add(new Date(),21)],['Corporation Tax return','HMRC',add(fye,12)]],
+   au:[['ASIC annual review','ASIC',add(new Date(),12)],['Business Activity Statement','ATO',add(new Date(),3)],['Company tax return','ATO',add(fye,7)]]}[S.market];
+  return set.map(([t,a,d])=>[t,a,f(d)]);
+}
+function vYear(){
+  return `<div class="card"><span class="eyebrow">Step 6 · Year one</span><h1>Your first-year compliance calendar</h1><p class="lead">AI builds the calendar from your market and year-end, then reminds you and Ascentia before every deadline.</p>
+  <div class="field" style="max-width:280px"><label for="fye">Financial year ends</label><select id="fye">${Array.from({length:12},(_,i)=>`<option value="${i+1}" ${i+1===S.fye?'selected':''}>${new Date(2026,i).toLocaleString('en',{month:'long'})}</option>`).join('')}</select></div>
+  <div class="tbl"><table><tr><th>Obligation</th><th>Authority</th><th>Due</th></tr>${cal().map(([t,a,d])=>`<tr><td><b>${t}</b></td><td>${a}</td><td>${d}</td></tr>`).join('')}</table></div>
+  <div class="result good"><h3>Added to your AI dashboard</h3><p>Ascentia will remind you 30, 14 and 3 days before each deadline, by app, email or WhatsApp.</p></div>
+  ${split('Built the calendar from your year-end and market rules.','Handles anything that needs judgement, like a late filing.')}
+  <div class="nav"><button class="btn ghost" data-go="4">Back</button><button class="btn gold" data-tab-go="ip">Next: protect your brand →</button></div></div>`;
+}
+function wYear(){$('#fye').onchange=e=>{S.fye=+e.target.value;log('Rebuilt compliance calendar for the new year-end');render()}}
+
+/* ------------ IP views ------------ */
+function suggest(desc){const out=[];NICE.forEach(([re,c,l])=>{if(re.test(desc)&&!out.find(o=>o[0]===c))out.push([c,l])});return out.length?out:[[35,'Business services']]}
+function vMark(){
+  const sug=suggest(S.desc);if(!S.classes.length)S.classes=sug.slice(0,2).map(s=>s[0]);
+  return `<div class="card"><span class="eyebrow">Step 1 · Your mark</span><h1>Tell AI what you sell</h1><p class="lead">AI reads your description and suggests the right Nice classes, so you protect what matters and pay for nothing else.</p>
+  <div class="split"><div class="field"><label for="mark">Brand name</label><input id="mark" value="${esc(S.mark)}"></div><div></div></div>
+  <div class="field"><label for="desc">What you sell, in your own words</label><textarea id="desc">${esc(S.desc)}</textarea></div>
+  <p class="eyebrow" style="margin:6px 0 8px">AI-suggested classes</p>
+  <div class="chips">${sug.map(([c,l])=>`<button class="chip" aria-pressed="${S.classes.includes(c)}" data-cls="${c}">Class ${c} · ${esc(l)}</button>`).join('')}</div>
+  <p class="note">${S.classes.length} class${S.classes.length===1?'':'es'} selected. Fees are per class.</p>
+  ${split('Matched your description to the Nice Classification.','Refines the wording of goods and services.')}${navBtns(0)}</div>`;
+}
+function wMark(){
+  $('#mark').oninput=e=>S.mark=e.target.value;
+  $('#desc').onchange=e=>{S.desc=e.target.value;S.classes=[];log('Suggested classes from your description');render()};
+  document.querySelectorAll('[data-cls]').forEach(b=>b.onclick=()=>{const c=+b.dataset.cls;S.classes=S.classes.includes(c)?S.classes.filter(x=>x!==c):[...S.classes,c];render()});
+}
+function vClear(){
+  return `<div class="card"><span class="eyebrow">Step 2 · Clearance</span><h1>Where will you sell?</h1><p class="lead">Pick your markets. AI searches each register for similar marks and explains any conflict in plain English.</p>
+  <div class="chips">${Object.entries(IPM).map(([k,v])=>`<button class="chip" aria-pressed="${S.ipMk.includes(k)}" data-mk="${k}">${v.n}${v.home?' (home)':''}</button>`).join('')}</div>
+  <div class="row" style="margin-top:14px"><button class="btn" id="cBtn"><span class="ai">AI</span> Run clearance search</button></div><div id="cOut">${S.clear?clearTable():''}</div>${navBtns(1)}</div>`;
+}
+function clearTable(){
+  const rows=S.ipMk.map(k=>{const h=hash(S.mark+k),r=h%100,lvl=r<62?'good':r<88?'warn':'bad';
+    const ex={good:'No similar marks in your classes.',warn:`“${S.mark.slice(0,4)}${['ER','ON','A'][h%3]}” is registered in class ${S.classes[0]||35}. Different enough to proceed, with care.`,bad:`“${S.mark}” is already registered for similar goods. Filing is likely to be refused.`}[lvl];
+    return [IPM[k].n,lvl,ex]});
+  return `<div class="tbl"><table><tr><th>Market</th><th>Risk</th><th>What AI found</th></tr>${rows.map(([n,l,e])=>`<tr><td><b>${n}</b></td><td><span class="tag ${l}">${{good:'Low',warn:'Medium',bad:'High'}[l]}</span></td><td>${esc(e)}</td></tr>`).join('')}</table></div>
+  ${split(`Searched ${S.ipMk.length} registers in ${S.classes.length} class${S.classes.length===1?'':'es'}.`,'Gives the go or no-go on medium and high risks.')}`;
+}
+function wClear(){
+  document.querySelectorAll('[data-mk]').forEach(b=>b.onclick=()=>{const k=b.dataset.mk;S.ipMk=S.ipMk.includes(k)?S.ipMk.filter(x=>x!==k):[...S.ipMk,k];S.clear=null;render()});
+  $('#cBtn').onclick=()=>thinking($('#cOut'),`Searching ${S.ipMk.length} trademark registers…`,1300,()=>{S.clear=true;log(`Clearance search across ${S.ipMk.length} markets`);enqueue('Go or no-go on clearance');render()});
+}
+function price(){
+  const nC=Math.max(1,S.classes.length),sel=S.ipMk.map(k=>[k,IPM[k]]);
+  let nat=0,madOfficial=0,madNat=0,desig=0;const rows=[];
+  sel.forEach(([k,v])=>{const n=(v.o+v.p)*nC;nat+=n;
+    if(v.m){const chf=v.m[0]+v.m[1]*(nC-1);desig+=chf;rows.push([v.n,n,chf*CHF,'Madrid'])}
+    else{madNat+=n;rows.push([v.n,n,n,v.home?'Home filing':'National only'])}});
+  const anyMad=desig>0,mad=madNat+(anyMad?(BASIC*CHF+desig*CHF+MADF):0);
+  return {nat,mad,rows,anyMad,nC,basic:BASIC*CHF};
+}
+function vRoute(){
+  const p=price(),max=Math.max(p.nat,p.mad,1),best=p.mad<p.nat?'Madrid':'National';
+  return `<div class="card"><span class="eyebrow">Step 3 · Route and price</span><h1>National or Madrid? AI does the maths.</h1><p class="lead">Priced for ${S.ipMk.length} markets and ${p.nC} class${p.nC===1?'':'es'}, using Ascentium’s SGD fees and WIPO’s official Madrid fees.</p>
+  <div class="bars"><div class="bar"><b>National</b><div class="track"><div class="fill" style="width:${p.nat/max*100}%;background:var(--blue-3)"></div></div><span class="v">S$${fmt(p.nat)}</span></div>
+  <div class="bar"><b>Madrid</b><div class="track"><div class="fill" style="width:${p.mad/max*100}%;background:var(--gold)"></div></div><span class="v">S$${fmt(p.mad)}</span></div></div>
+  <div class="kpis"><div class="kpi"><small>NATIONAL</small><div class="big">S$${fmt(p.nat)}</div></div><div class="kpi"><small>MADRID ROUTE</small><div class="big">S$${fmt(p.mad)}</div></div><div class="kpi hl"><small>AI RECOMMENDS</small><div class="big">${best}</div><small>${p.mad<p.nat?'Saves S$'+fmt(p.nat-p.mad):'National is cheaper here'}</small></div></div>
+  <div class="tbl"><table><tr><th>Market</th><th>National</th><th>Madrid route</th><th>How</th></tr>${p.rows.map(([n,a,b,h])=>`<tr><td><b>${n}</b></td><td>S$${fmt(a)}</td><td>S$${fmt(b)}</td><td><span class="tag ${h==='Madrid'?'good':'info'}">${h}</span></td></tr>`).join('')}
+  ${p.anyMad?`<tr><td><b>WIPO basic fee + our Madrid fee</b></td><td>—</td><td>S$${fmt(p.basic+MADF)}</td><td><span class="tag good">Once</span></td></tr>`:''}</table></div>
+  <p class="note">National: Ascentium official plus professional fees per class (SGD). Madrid: WIPO country fees at CHF 1 ≈ S$1.59, basic fee CHF 653, our S$756 fee. Hong Kong is always national; Singapore is the home filing.</p>
+  ${split('Priced both routes for every market and recommended the cheaper one.','Confirms the strategy, including the 5-year link to the home mark.')}${navBtns(2,false,'Continue with '+best)}</div>`;
+}
+function vIpFile(){
+  const p=price(),best=p.mad<p.nat?'Madrid':'National';
+  return `<div class="card"><span class="eyebrow">Step 4 · File</span><h1>Ready to file ${esc(S.mark)}</h1><p class="lead">AI prepares the forms for every office. An IP specialist reviews and files, with local counsel where needed.</p>
+  <div class="kpis"><div class="kpi"><small>MARK</small><div class="big" style="font-size:24px">${esc(S.mark)}</div></div><div class="kpi"><small>CLASSES</small><div class="big" style="font-size:24px">${S.classes.join(', ')||'35'}</div></div><div class="kpi hl"><small>${best.toUpperCase()} ROUTE, ALL IN</small><div class="big" style="font-size:24px">S$${fmt(Math.min(p.mad,p.nat))}</div></div></div>
+  <div class="docs" style="margin-top:14px">${S.ipMk.map(k=>`<div class="doc"><div><b>${IPM[k].n}</b><small>${IPM[k].m&&best==='Madrid'?'Madrid designation':'National application'} · AI-prepared form</small></div><span class="tag ${S.ipSubmitted?'good':'info'}">${S.ipSubmitted?'Filed':'Ready'}</span></div>`).join('')}</div>
+  <div class="row" style="margin-top:14px"><button class="btn gold" id="ipSub" ${S.ipSubmitted?'disabled':''}>Submit for specialist review</button></div><div id="ipOut"></div>
+  ${split('Prepared every form and checked them against each office’s rules.','Reviews, signs and files, then answers any objection.')}${navBtns(3)}</div>`;
+}
+function wIpFile(){const b=$('#ipSub');if(b)b.onclick=()=>{enqueue('Review and file trademark');log('Prepared filing forms for '+S.ipMk.length+' offices');thinking($('#ipOut'),'Waiting for the IP specialist…',1800,()=>{S.ipSubmitted=true;approve('Review and file trademark','IP specialist');render()})}}
+function vWatch(){
+  const fd=new Date(),ren=new Date(fd);ren.setFullYear(ren.getFullYear()+10);const f=d=>d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});
+  const h=hash(S.mark),alertMk=IPM[S.ipMk[h%S.ipMk.length]]?.n||'Malaysia';
+  return `<div class="card"><span class="eyebrow">Step 5 · Watch and renew</span><h1>Your brand, protected and watched</h1><p class="lead">Every mark sits in your AI dashboard next to your company filings. AI watches new filings and tracks every renewal.</p>
+  <div class="result warn"><h3>Watch alert: similar mark filed in ${esc(alertMk)}</h3><p>“${esc(S.mark.slice(0,5))}IX” was filed yesterday in class ${S.classes[0]||35}. AI rates it 78% similar. The opposition window closes in 58 days.</p><div class="row" style="margin-top:10px"><button class="btn" id="oppBtn">Ask a specialist about opposing</button></div></div>
+  <div class="tbl"><table><tr><th>Market</th><th>Status</th><th>Renewal due</th></tr>${S.ipMk.map(k=>`<tr><td><b>${IPM[k].n}</b></td><td><span class="tag ${S.ipSubmitted?'info':'warn'}">${S.ipSubmitted?'Pending examination':'Not yet filed'}</span></td><td>${f(ren)}</td></tr>`).join('')}</table></div>
+  ${split('Monitors new filings every month and tracks renewal dates.','Decides whether to oppose and handles renewals.')}${navBtns(4,true)}</div>`;
+}
+function wWatch(){$('#oppBtn').onclick=()=>{enqueue('Advise on opposition');log('Flagged a similar new filing for specialist review')}}
+
+/* ------------ render ------------ */
+const VIEWS={inc:[[vQualify,wQualify],[vName,wName],[vKyc,wKyc],[vDocs,wDocs],[vFile,wFile],[vYear,wYear]],ip:[[vMark,wMark],[vClear,wClear],[vRoute,()=>{}],[vIpFile,wIpFile],[vWatch,wWatch]]};
+const HERO={inc:['Incorporation','Incorporate your company, <em>AI-fied.</em>','Six steps from SME check to a first-year calendar. AI reads, drafts and tracks; an Ascentium expert signs off every filing.'],ip:['Global IP','Protect your brand in 130+ countries, <em>AI-fied.</em>','Five steps from class suggestions to watch alerts, with national and Madrid pricing worked out for you. Powered by Zolvit.']};
+function render(){
+  const hh=HERO[S.tab];$('#crumb').textContent=hh[0];$('#heroT').innerHTML=hh[1];$('#heroP').textContent=hh[2];
+  document.querySelectorAll('[data-tab]').forEach(b=>b.setAttribute('aria-selected',b.dataset.tab===S.tab));
+  drawSteps();const [v,w]=VIEWS[S.tab][S[S.tab]];$('#main').innerHTML=v();w();
+}
+document.addEventListener('click',e=>{
+  const g=e.target.closest('[data-go]');if(g&&!g.disabled){go(+g.dataset.go);return}
+  const t=e.target.closest('[data-tab]');if(t){S.tab=t.dataset.tab;render();return}
+  const tg=e.target.closest('[data-tab-go]');if(tg){S.tab=tg.dataset.tabGo;render();window.scrollTo({top:0,behavior:'smooth'})}
+});
+$('#dlgX').onclick=()=>$('#dlg').close();
+render();drawSide();
+</script>
+</body>
+</html>
